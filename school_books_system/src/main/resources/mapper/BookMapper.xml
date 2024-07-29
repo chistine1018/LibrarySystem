@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anson.school_books_system.mapper.BookMapper">
+
+    <resultMap id="BaseResultMap" type="com.anson.school_books_system.po.Book">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="bookNumber" column="book_number" jdbcType="VARCHAR"/>
+            <result property="coverUrl" column="cover_url" jdbcType="VARCHAR"/>
+            <result property="bookName" column="book_name" jdbcType="VARCHAR"/>
+            <result property="author" column="author" jdbcType="VARCHAR"/>
+            <result property="categoryId" column="category_id" jdbcType="BIGINT"/>
+            <result property="price" column="price" jdbcType="DECIMAL"/>
+            <result property="publishingHouse" column="publishing_house" jdbcType="VARCHAR"/>
+            <result property="publicationDate" column="publication_date" jdbcType="DATE"/>
+            <result property="total" column="total" jdbcType="INTEGER"/>
+            <result property="extantTotal" column="extant_total" jdbcType="INTEGER"/>
+            <result property="intro" column="intro" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="creator" column="creator" jdbcType="VARCHAR"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="modifier" column="modifier" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,book_number,cover_url,
+        book_name,author,category_id,
+        price,publishing_house,publication_date,
+        total,extant_total,intro,
+        create_time,creator,update_time,
+        modifier
+    </sql>
+</mapper>

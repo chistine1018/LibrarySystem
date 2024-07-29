@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anson.school_books_system.mapper.SysTokenMapper">
+
+    <resultMap id="BaseResultMap" type="com.anson.school_books_system.po.SysToken">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="token" column="token" jdbcType="VARCHAR"/>
+            <result property="authInfo" column="auth_info" jdbcType="VARCHAR"/>
+            <result property="expiredTime" column="expired_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,token,auth_info,
+        expired_time
+    </sql>
+</mapper>
