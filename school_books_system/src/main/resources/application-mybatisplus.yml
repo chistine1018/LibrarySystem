@@ -1,0 +1,41 @@
+#datasource
+spring.datasource:
+  type: com.alibaba.druid.pool.DruidDataSource
+  #   數據源其他配置
+  druid:
+#    driverClassName: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #url: jdbc:mysql://地址+端口/school_book_sys?useUnicode=true&useSSL=false&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/school_books_system?useUnicode=true&useSSL=false&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+
+    username: root
+    password: springboot
+    #     配置初始化大小、最小、最大線程數
+    initialSize: 5
+    minIdle: 5
+    #     CPU核數+1，也可以大些但不要超過20，數據庫枷鎖時連接過多性能下降
+    maxActive: 20
+    #     最大等待時間，內網：800，外網：1200（三次握手1s）
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    #     配置一個連接池在池中最大空間時間，單位是毫秒
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1
+    testWhileIdle: true
+    #     設置從連接池獲取連接時是否檢查連接有效性，true檢查，false不檢查
+    testOnBorrow: true
+    #     設置從連接池歸還連接時是否檢查連接有效性，true檢查，false不檢查
+    testOnReturn: true
+    #     可以支持PSCache（提升寫入，查詢效率）
+    poolPreparedStatements: true
+    #   配置監控統計攔截的filters，去掉後監控介面sql無法統計，'wall'用於防火牆
+#    filters: stat,wall,log4j
+    filters: stat,wall
+    #     保持長連接
+    keepAlive: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+# 打印 sql 執行日誌，上線時可以關閉
+mybatis-plus.configuration.log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
