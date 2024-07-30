@@ -141,6 +141,8 @@ import BookCategoryList from '@/views/bookCategory/list'
 import CarouselMapList from '@/views/carouselMap/list'
 import ReturnBookList from '@/views/returnBook/list'
 import Home from '@/views/home/index'
+import UserInfo from '@/views/home/userInfo'
+
 import VueCookie from 'vue-cookie'
 
 export default {
@@ -153,7 +155,8 @@ export default {
     ReturnBookList,
     BookCategoryList,
     CarouselMapList,
-    Home
+    Home,
+    UserInfo
   },
   data () {
     return {
@@ -174,13 +177,13 @@ export default {
     let authInfo = JSON.parse(VueCookie.get('authInfo'))
     // ROLE_USER,ROLE_ADMIN,ROLE_SUPER_ADMIN
     if (authInfo.role === 'ROLE_USER') {
-      this.role = '用户'
+      this.role = '用戶'
     }
     if (authInfo.role === 'ROLE_ADMIN') {
-      this.role = '管理员'
+      this.role = '管理員'
     }
     if (authInfo.role === 'ROLE_SUPER_ADMIN') {
-      this.role = '超级管理员'
+      this.role = '超級管理員'
     }
 
     if (authInfo.role === 'ROLE_USER') {

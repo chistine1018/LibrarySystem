@@ -9,6 +9,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.anson.school_books_system.po.User;
 import com.anson.school_books_system.service.UserService;
 import com.anson.school_books_system.mapper.UserMapper;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -18,6 +20,8 @@ import java.util.Objects;
 * @description 針對表【user】的數據庫操作Service實現
 * @createDate 2024-07-29 20:07:50
 */
+@Slf4j
+@AllArgsConstructor
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     implements UserService{
