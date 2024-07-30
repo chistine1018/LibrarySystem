@@ -185,6 +185,7 @@ export default {
       this.$refs['ruleForm'].validate((valid) => {
         if (valid) {
           this.loading.loginLoading = true
+          this.$router.push({path: '/main'})
         } else {
           return false
         }
