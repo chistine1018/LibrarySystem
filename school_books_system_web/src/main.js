@@ -3,6 +3,11 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+import VueCookie from 'vue-cookie'
+Vue.use(VueCookie) // 掛載在全局了
+Vue.use(ElementUI) // 掛載在全局了
 
 Vue.config.productionTip = false
 
