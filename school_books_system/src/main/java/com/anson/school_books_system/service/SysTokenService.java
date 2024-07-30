@@ -11,4 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface SysTokenService extends IService<SysToken> {
     String createToken(AuthVO authVO);
+
+    AuthVO getByToken(String token);
 }

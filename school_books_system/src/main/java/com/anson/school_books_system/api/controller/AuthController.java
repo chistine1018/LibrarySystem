@@ -5,6 +5,7 @@ import com.anson.school_books_system.api.form.AuthForm;
 import com.anson.school_books_system.api.vo.AuthVO;
 import com.anson.school_books_system.common.result.ResponseResult;
 import com.anson.school_books_system.service.AuthService;
+import com.anson.school_books_system.utils.SecurityUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
@@ -38,4 +39,13 @@ public class AuthController {
         log.info("test");
     }
 
+    /**
+     * 獲取當前登陸人的信息
+     *
+     * @return
+     */
+    @GetMapping("/getAuthByToken")
+    public AuthVO getAuthByToken() {
+        return SecurityUtil.getAuth();
+    }
 }

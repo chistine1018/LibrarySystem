@@ -9,6 +9,9 @@ import com.anson.school_books_system.service.SysTokenService;
 import com.anson.school_books_system.mapper.SysTokenMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.Objects;
+
 /**
 * @author user
 * @description 針對表【sys_token】的數據庫操作Service實現
@@ -28,6 +31,21 @@ public class SysTokenServiceImpl extends ServiceImpl<SysTokenMapper, SysToken>
         save(sysToken);
 
         return sysToken.getToken();
+    }
+
+    @Override
+    public AuthVO getByToken(String token) {
+        SysToken sysToken = lambdaQuery().eq(SysToken::getToken, token)
+                .one();
+        if (Objects.isNull(sysToken)) {
+            return null;
+        }
+
+        // 續約
+        sysToken.setExpiredTime(SysUtil.getTokenExpiredTime());
+        updateById(sysToken);
+
+        return JSON.parseObject(sysToken.getAuthInfo(), AuthVO.class);
     }
 }
 
