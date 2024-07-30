@@ -141,6 +141,7 @@ import BookCategoryList from '@/views/bookCategory/list'
 import CarouselMapList from '@/views/carouselMap/list'
 import ReturnBookList from '@/views/returnBook/list'
 import Home from '@/views/home/index'
+import VueCookie from 'vue-cookie'
 
 export default {
   components: {
@@ -170,7 +171,23 @@ export default {
   computed: {},
   // 頁面渲染成功後獲取數據
   created () {
+    let authInfo = JSON.parse(VueCookie.get('authInfo'))
+    // ROLE_USER,ROLE_ADMIN,ROLE_SUPER_ADMIN
+    if (authInfo.role === 'ROLE_USER') {
+      this.role = '用户'
+    }
+    if (authInfo.role === 'ROLE_ADMIN') {
+      this.role = '管理员'
+    }
+    if (authInfo.role === 'ROLE_SUPER_ADMIN') {
+      this.role = '超级管理员'
+    }
 
+    if (authInfo.role === 'ROLE_USER') {
+      this.name = authInfo.userVO.name
+    } else {
+      this.name = authInfo.adminVO.nickName
+    }
   },
   // 自定義方法
   methods: {

@@ -119,6 +119,8 @@
 <script>
 // import request from '@/utils/request'
 // import {Message} from 'element-ui'
+import VueCookie from 'vue-cookie'
+import AuthAPI from '../../api/auth'
 
 export default {
   data () {
@@ -185,11 +187,24 @@ export default {
       this.$refs['ruleForm'].validate((valid) => {
         if (valid) {
           this.loading.loginLoading = true
-          this.$router.push({path: '/main'})
+          AuthAPI.login(this.loginForm).then(resp => {
+            console.log('登錄', resp)
+            if (resp.code === 200) {
+              this.setLoginSuccessInfo(resp)
+              this.$router.push({path: '/main'})
+            }
+          }).finally(f => {
+            this.loading.loginLoading = false
+          })
         } else {
           return false
         }
       })
+    },
+    setLoginSuccessInfo (info) {
+      VueCookie.set('Authorization', info.data.token, 5)
+      VueCookie.set('authInfo', JSON.stringify(info.data), 5)
+      // JSON.parse(VueCookie.get('authInfo'))
     },
 
     register () {

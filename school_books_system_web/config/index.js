@@ -5,8 +5,13 @@
 const path = require('path')
 
 module.exports = {
+  // 基本路徑 baseURL已經過時
+  publicPath: './',
+  // 輸出文件目錄
+  outputDir: 'dist',
   dev: {
 
+    proxy: 'http://localhost:9292', // 配置跨域處理，只有一個代理
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
@@ -14,7 +19,7 @@ module.exports = {
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
-    port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    port: 9588, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,
@@ -56,7 +61,7 @@ module.exports = {
      * Source Maps
      */
 
-    productionSourceMap: true,
+    productionSourceMap: false,
     // https://webpack.js.org/configuration/devtool/#production
     devtool: '#source-map',
 
