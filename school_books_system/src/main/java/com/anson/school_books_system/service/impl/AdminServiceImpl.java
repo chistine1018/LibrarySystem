@@ -111,7 +111,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin>
         Page<Admin> adminPage = lambdaQuery()
                 .like(StringUtils.isNotBlank(query.getNickName()), Admin::getNickName, query.getNickName())
                 .like(StringUtils.isNotBlank(query.getUsername()), Admin::getUsername, query.getUsername())
-                .page(new Page<>(query.getCurrent(), query.getSize()));
+                .page(query.getPage());
         return adminPage.convert(userConverter::converter);
     }
 }

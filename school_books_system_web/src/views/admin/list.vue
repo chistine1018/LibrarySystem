@@ -222,6 +222,12 @@ export default {
     },
     dataSortChange (sortInfo) {
       console.log(sortInfo)
+      // prop : 字段，order ：ascending上，descending下
+      if (sortInfo.order === 'ascending') {
+        this.queryData.column = '-' + sortInfo.prop
+      } else {
+        this.queryData.column = '+' + sortInfo.prop
+      }
       this.findData()
     },
     handleSizeChange (val) {
