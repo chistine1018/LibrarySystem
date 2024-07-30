@@ -142,7 +142,7 @@ import CarouselMapList from '@/views/carouselMap/list'
 import ReturnBookList from '@/views/returnBook/list'
 import Home from '@/views/home/index'
 import UserInfo from '@/views/home/userInfo'
-
+import AuthAPI from '../../api/auth'
 import VueCookie from 'vue-cookie'
 
 export default {
@@ -214,7 +214,16 @@ export default {
     },
     logOutHandler () {
       this.loading.loadingLogOut = true
-      this.$router.push({path: '/'})
+
+      AuthAPI.logOut().then(resp => {
+        if (resp.code === 200) {
+          this.$router.push({path: '/'})
+          VueCookie.delete('Authorization')
+          VueCookie.delete('userInfo')
+        }
+      }).finally(f => {
+        this.loading.loadingLogOut = false
+      })
     }
   }
 }
