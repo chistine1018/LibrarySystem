@@ -12,4 +12,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface AdminService extends IService<Admin> {
     AdminVO login(AuthForm form);
+
+    void saveSuperAdmin(String username, String password);
+
 }

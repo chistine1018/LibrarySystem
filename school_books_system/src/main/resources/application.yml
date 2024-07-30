@@ -5,3 +5,10 @@ spring:
   profiles:
     # 激活環境配置文件
     active: mybatisplus
+
+# 圖書管理系統的一些自定義配置
+school-books-system.config:
+  # 初始化超級管理員帳號和密碼
+  super-admin:
+    username: admin
+    password: admin
