@@ -194,6 +194,7 @@ export default {
     },
     logOutHandler () {
       this.loading.loadingLogOut = true
+      this.$router.push({path: '/'})
     }
   }
 }
