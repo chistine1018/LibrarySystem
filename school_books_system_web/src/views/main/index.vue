@@ -132,8 +132,27 @@
 
 <script>
 
+import AdminList from '@/views/admin/list'
+import UserList from '@/views/user/list'
+import AnnouncementList from '@/views/announcement/list'
+import BookList from '@/views/book/list'
+import BookBorrowList from '@/views/bookBorrow/list'
+import BookCategoryList from '@/views/bookCategory/list'
+import CarouselMapList from '@/views/carouselMap/list'
+import ReturnBookList from '@/views/returnBook/list'
+import Home from '@/views/home/index'
+
 export default {
   components: {
+    AdminList,
+    UserList,
+    AnnouncementList,
+    BookList,
+    BookBorrowList,
+    ReturnBookList,
+    BookCategoryList,
+    CarouselMapList,
+    Home
   },
   data () {
     return {
