@@ -8,6 +8,7 @@ import com.anson.school_books_system.service.AdminService;
 import com.anson.school_books_system.service.AuthService;
 import com.anson.school_books_system.service.SysTokenService;
 import com.anson.school_books_system.service.UserService;
+import com.anson.school_books_system.utils.SecurityUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,11 @@ public class AuthServiceImpl implements AuthService {
 
         authVO.setToken(sysTokenService.createToken(authVO));
         return authVO;
+    }
+
+    @Override
+    public void logout() {
+        sysTokenService.removeByToken(SecurityUtil.getAuth().getToken());
     }
 
 }

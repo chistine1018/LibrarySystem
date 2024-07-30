@@ -39,6 +39,11 @@ public class AuthController {
         log.info("test");
     }
 
+    @GetMapping("/logOut")
+    public void logOut() {
+        authServer.logout();
+    }
+
     /**
      * 獲取當前登陸人的信息
      *

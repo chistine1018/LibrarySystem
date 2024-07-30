@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Slf4j
 @Configuration
 @MapperScan("com.anson.*.mapper")
-@EnableScheduling
+@EnableScheduling //開啟Scheduling
 @EnableTransactionManagement
 public class ApplicationConfig {
 

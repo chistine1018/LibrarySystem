@@ -13,13 +13,13 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
-* @author user
-* @description 針對表【sys_token】的數據庫操作Service實現
-* @createDate 2024-07-29 20:07:46
-*/
+ * @author user
+ * @description 針對表【sys_token】的數據庫操作Service實現
+ * @createDate 2024-07-29 20:07:46
+ */
 @Service
 public class SysTokenServiceImpl extends ServiceImpl<SysTokenMapper, SysToken>
-    implements SysTokenService{
+        implements SysTokenService {
 
     @Override
     public String createToken(AuthVO authVO) {
@@ -41,11 +41,31 @@ public class SysTokenServiceImpl extends ServiceImpl<SysTokenMapper, SysToken>
             return null;
         }
 
+        if (LocalDateTime.now().isAfter(sysToken.getExpiredTime())) {
+            // token 過期，删除
+            removeByToken(token);
+            return null;
+        }
+
         // 續約
         sysToken.setExpiredTime(SysUtil.getTokenExpiredTime());
         updateById(sysToken);
 
         return JSON.parseObject(sysToken.getAuthInfo(), AuthVO.class);
+    }
+
+    @Override
+    public void removeByToken(String token) {
+        lambdaUpdate()
+                .eq(SysToken::getToken, token)
+                .remove();
+    }
+
+    @Override
+    public void removeExpiredToken(LocalDateTime now) {
+        lambdaUpdate()
+                .lt(SysToken::getExpiredTime, now)
+                .remove();
     }
 }
 
