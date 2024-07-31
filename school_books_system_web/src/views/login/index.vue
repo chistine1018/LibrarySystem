@@ -118,9 +118,10 @@
 
 <script>
 // import request from '@/utils/request'
-// import {Message} from 'element-ui'
+import {Message} from 'element-ui'
 import VueCookie from 'vue-cookie'
 import AuthAPI from '../../api/auth'
+import UserAPI from '../../api/user'
 
 export default {
   data () {
@@ -212,6 +213,15 @@ export default {
       this.$refs['ruleRegisterForm'].validate((valid) => {
         if (valid) {
           this.loading.registerLoading = true
+          UserAPI.register(this.userInfo).then(resp => {
+            if (resp.code !== 200) {
+              return
+            }
+            Message.success('註冊成功！')
+            this.resetForm('ruleRegisterForm')
+          }).finally(f => {
+            this.loading.registerLoading = false
+          })
         } else {
 
         }

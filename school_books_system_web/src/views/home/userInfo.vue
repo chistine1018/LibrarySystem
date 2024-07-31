@@ -100,7 +100,7 @@
 // import request from '@/utils/request'
 import VueCookie from 'vue-cookie'
 import AuthAPI from '../../api/auth'
-// import UserAPI from '../../api/user'
+import UserAPI from '../../api/user'
 import SuperAdminAPI from '../../api/superAdmin'
 import {Message} from 'element-ui'
 // import {startLoading, endLoading} from '../../utils/loading'
@@ -165,21 +165,26 @@ export default {
       this.userInfo = authInfo.userVO
       if (authInfo.userVO !== null) {
         this.userInfo = authInfo.userVO
-
         this.userInfo.password = null
       }
 
       if (authInfo.adminVO !== null) {
         this.adminInfo = authInfo.adminVO
-        if (this.adminInfo) {
-          this.adminInfo.password = null
-        }
+        this.adminInfo.password = null
       }
     },
     updateInfo () {
       this.loading.loadingUpdateInfo = true
       if (this.role === 'ROLE_USER') {
-
+        // 用戶信息修改
+        UserAPI.update(this.userInfo).then(resp => {
+          if (resp.code !== 200) {
+            return
+          }
+          Message.success('修改成功，重新登錄才會刷新數據！')
+        }).finally(f => {
+          this.loading.loadingUpdateInfo = false
+        })
       } else {
         // 管理員信息修改
         SuperAdminAPI.saveOrUpdate(this.adminInfo).then(resp => {
