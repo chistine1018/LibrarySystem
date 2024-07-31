@@ -200,7 +200,7 @@ export default {
     },
     handleCurrentChange (val) {
       // 改變頁碼
-      this.queryData.current = this.queryData.current + 1
+      this.queryData.current = val
       this.findData()
     }
   }
