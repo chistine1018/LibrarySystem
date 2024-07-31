@@ -133,6 +133,8 @@
 <script>
 // import request from '@/utils/request'
 import BookBorrowAPI from '../../api/bookBorrow'
+import UserReturnBookAPI from '../../api/userReturnBook'
+import {Message} from 'element-ui'
 
 export default {
   data () {
@@ -238,6 +240,20 @@ export default {
 
     doReturnBook () {
       this.loading.loadingReturnBookData = true
+      UserReturnBookAPI.userReturnBook({
+        'bookBorrowInfoId': this.returnBookData.id,
+        'count': this.returnBookData.returnTotal
+      })
+        .then(resp => {
+          if (resp.code !== 200) {
+            return
+          }
+          Message.success('歸還成功！')
+          this.findData()
+          this.dialog.returnBookDialog = false
+        }).finally(f => {
+          this.loading.loadingReturnBookData = false
+        })
     },
 
     returnBook (index, row) {
