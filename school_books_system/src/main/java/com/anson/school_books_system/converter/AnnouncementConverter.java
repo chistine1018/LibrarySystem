@@ -3,7 +3,9 @@ package com.anson.school_books_system.converter;
 
 import com.anson.school_books_system.api.form.AnnouncementSaveForm;
 import com.anson.school_books_system.api.vo.AnnouncementVO;
+import com.anson.school_books_system.api.vo.CarouselMapVO;
 import com.anson.school_books_system.po.Announcement;
+import com.anson.school_books_system.po.CarouselMap;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
@@ -18,5 +20,7 @@ public interface AnnouncementConverter {
     Announcement converter(AnnouncementSaveForm form);
 
     AnnouncementVO converter(Announcement form);
+
+    CarouselMapVO converter(CarouselMap carouselMap);
 
 }
