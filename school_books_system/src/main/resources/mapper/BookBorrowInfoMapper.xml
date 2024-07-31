@@ -19,4 +19,43 @@
         borrow_count,return_count,create_time,
         update_time
     </sql>
+
+    <select id="page" resultType="com.anson.school_books_system.api.vo.BookBorrowInfoVO">
+        SELECT
+        a.*,
+        b.book_number,
+        b.cover_url,
+        b.book_name,
+        c.student_number,
+        c.name
+        FROM book_borrow_info a
+        LEFT JOIN book b ON a.book_id = b.id
+        LEFT JOIN `user` c ON a.user_id = c.id
+        <where>
+            <if test="query.bookNumber != null and query.bookNumber != ''">
+                AND b.book_number LIKE CONCAT('%', #{query.bookNumber}, '%')
+            </if>
+            <if test="query.bookName != null and query.bookName != ''">
+                AND b.book_name LIKE CONCAT('%', #{query.bookName}, '%')
+            </if>
+            <if test="query.studentNumber != null and query.studentNumber != ''">
+                AND c.student_number LIKE CONCAT('%', #{query.studentNumber}, '%')
+            </if>
+            <if test="query.name != null and query.name != ''">
+                AND c.name LIKE CONCAT('%', #{query.name}, '%')
+            </if>
+            <if test="query.bookId != null">
+                AND a.book_id = #{query.bookId}
+            </if>
+            <if test="query.userId != null">
+                AND a.user_id = #{query.userId}
+            </if>
+            <if test="query.startTime != null">
+                AND a.create_time &gt;= #{query.startTime}
+            </if>
+            <if test="query.endTime != null">
+                AND a.create_time &lt; adddate(#{query.endTime}, 1)
+            </if>
+        </where>
+    </select>
 </mapper>

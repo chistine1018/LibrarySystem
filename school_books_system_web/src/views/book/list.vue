@@ -99,6 +99,8 @@
             <template slot-scope="scope">
               <el-button  type="text"
                           @click="updateData(scope.$index, scope.row)">修改</el-button>
+              <el-button  type="text"
+                          @click="bookBorrow(scope.$index, scope.row)">借閱</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -270,6 +272,7 @@ import BookAPI from '../../api/book'
 import VueCookie from 'vue-cookie'
 import {Message} from 'element-ui'
 import BookCategoryAPI from '../../api/bookCategory'
+import BookBorrowAPI from '../../api/bookBorrow'
 
 export default {
   data () {
@@ -433,6 +436,16 @@ export default {
     },
     doBookBorrow () {
       this.loading.loadingBookBorrowData = true
+      BookBorrowAPI.bookBorrow(this.bookBorrowData).then(resp => {
+        if (resp.code !== 200) {
+          return
+        }
+        Message.success('借閱成功！')
+        this.findData()
+        this.dialog.bookBorrowDialog = false
+      }).finally(f => {
+        this.loading.loadingBookBorrowData = false
+      })
     },
     findCategory (categoryName) {
       this.loading.loadingCategory = true
