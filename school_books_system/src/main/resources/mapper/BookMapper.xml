@@ -5,30 +5,68 @@
 <mapper namespace="com.anson.school_books_system.mapper.BookMapper">
 
     <resultMap id="BaseResultMap" type="com.anson.school_books_system.po.Book">
-            <id property="id" column="id" jdbcType="BIGINT"/>
-            <result property="bookNumber" column="book_number" jdbcType="VARCHAR"/>
-            <result property="coverUrl" column="cover_url" jdbcType="VARCHAR"/>
-            <result property="bookName" column="book_name" jdbcType="VARCHAR"/>
-            <result property="author" column="author" jdbcType="VARCHAR"/>
-            <result property="categoryId" column="category_id" jdbcType="BIGINT"/>
-            <result property="price" column="price" jdbcType="DECIMAL"/>
-            <result property="publishingHouse" column="publishing_house" jdbcType="VARCHAR"/>
-            <result property="publicationDate" column="publication_date" jdbcType="DATE"/>
-            <result property="total" column="total" jdbcType="INTEGER"/>
-            <result property="extantTotal" column="extant_total" jdbcType="INTEGER"/>
-            <result property="intro" column="intro" jdbcType="VARCHAR"/>
-            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-            <result property="creator" column="creator" jdbcType="VARCHAR"/>
-            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
-            <result property="modifier" column="modifier" jdbcType="VARCHAR"/>
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="bookNumber" column="book_number" jdbcType="VARCHAR"/>
+        <result property="coverUrl" column="cover_url" jdbcType="VARCHAR"/>
+        <result property="bookName" column="book_name" jdbcType="VARCHAR"/>
+        <result property="author" column="author" jdbcType="VARCHAR"/>
+        <result property="categoryId" column="category_id" jdbcType="BIGINT"/>
+        <result property="price" column="price" jdbcType="DECIMAL"/>
+        <result property="publishingHouse" column="publishing_house" jdbcType="VARCHAR"/>
+        <result property="publicationDate" column="publication_date" jdbcType="DATE"/>
+        <result property="total" column="total" jdbcType="INTEGER"/>
+        <result property="extantTotal" column="extant_total" jdbcType="INTEGER"/>
+        <result property="intro" column="intro" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="creator" column="creator" jdbcType="VARCHAR"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="modifier" column="modifier" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,book_number,cover_url,
+        id
+        ,book_number,cover_url,
         book_name,author,category_id,
         price,publishing_house,publication_date,
         total,extant_total,intro,
         create_time,creator,update_time,
         modifier
     </sql>
+    <select id="bookListBy" resultType="com.anson.school_books_system.po.Book">
+        select *
+        from book
+        where book_number = #{bookNumber}
+           or book_name = #{bookName}
+    </select>
+    <select id="one" resultType="com.anson.school_books_system.api.vo.BookVO">
+        SELECT a.*,
+               b.category_name
+        FROM book a
+                 LEFT JOIN book_category b ON a.category_id = b.id
+        WHERE a.id = #{id}
+    </select>
+    <select id="page" resultType="com.anson.school_books_system.api.vo.BookVO">
+        SELECT
+        a.*,
+        b.category_name
+        FROM book a
+        LEFT JOIN book_category b ON a.category_id = b.id
+        <where>
+            <if test="query.bookNumber != null and query.bookNumber != ''">
+                AND a.book_number LIKE CONCAT('%', #{query.bookNumber}, '%')
+            </if>
+            <if test="query.bookName != null and query.bookName != ''">
+                AND a.book_name LIKE CONCAT('%', #{query.bookName}, '%')
+            </if>
+            <if test="query.author != null and query.author != ''">
+                AND a.author LIKE CONCAT('%', #{query.author}, '%')
+            </if>
+            <if test="query.publishingHouse != null and query.publishingHouse != ''">
+                AND a.publishing_house LIKE CONCAT('%', #{query.publishingHouse}, '%')
+            </if>
+            <if test="query.categoryId != null">
+                AND a.category_id = #{query.categoryId}
+            </if>
+        </where>
+    </select>
 </mapper>
