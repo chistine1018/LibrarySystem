@@ -2,7 +2,9 @@ package com.anson.school_books_system.api.controller;
 
 
 
+import com.anson.school_books_system.common.apirule.ApiRole;
 import com.anson.school_books_system.common.result.ResponseResult;
+import com.anson.school_books_system.enums.RoleEnum;
 import com.anson.school_books_system.utils.ImgFileUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +33,7 @@ public class FileUploadController {
      * @param file 圖片文件
      * @return 圖片地址
      */
+    @ApiRole(role = {RoleEnum.ROLE_ADMIN})
     @PostMapping("/imgUpload")
     public String imgUpload(MultipartFile file) {
         return ImgFileUtil.uploadImg(file);

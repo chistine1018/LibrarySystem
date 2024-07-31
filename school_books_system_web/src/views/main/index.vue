@@ -28,56 +28,56 @@
             <i class="el-icon-menu"></i>
             <span slot="title">首頁</span>
           </el-menu-item>
-          <el-submenu index="2">
+          <el-submenu index="2" v-if="$roleRule(['ROLE_SUPER_ADMIN'])">
             <template slot="title">
               <i class="el-icon-s-custom"></i>
               <span>管理員管理</span>
             </template>
             <el-menu-item index="admin-list">管理員列表</el-menu-item>
           </el-submenu>
-          <el-submenu index="3">
+          <el-submenu index="3" v-if="$roleRule(['ROLE_ADMIN'])">
             <template slot="title">
               <i class="el-icon-user"></i>
               <span>用戶管理</span>
             </template>
             <el-menu-item index="user-list">用戶列表</el-menu-item>
           </el-submenu>
-          <el-submenu index="4">
+          <el-submenu index="4" v-if="$roleRule(['ROLE_ADMIN', 'ROLE_USER'])">
             <template slot="title">
               <i class="el-icon-s-grid"></i>
               <span>圖書類別管理</span>
             </template>
             <el-menu-item index="bookCategory-list">類別列表</el-menu-item>
           </el-submenu>
-          <el-submenu index="5">
+          <el-submenu index="5" v-if="$roleRule(['ROLE_ADMIN', 'ROLE_USER'])">
             <template slot="title">
               <i class="el-icon-folder"></i>
               <span>圖書管理</span>
             </template>
             <el-menu-item index="book-list">圖書列表</el-menu-item>
           </el-submenu>
-          <el-submenu index="6">
+          <el-submenu index="6" v-if="$roleRule(['ROLE_ADMIN', 'ROLE_USER'])">
             <template slot="title">
               <i class="el-icon-document"></i>
               <span>圖書借閱管理</span>
             </template>
             <el-menu-item index="bookBorrow-list">借閱列表</el-menu-item>
           </el-submenu>
-          <el-submenu index="7">
+          <el-submenu index="7" v-if="$roleRule(['ROLE_ADMIN', 'ROLE_USER'])">
             <template slot="title">
               <i class="el-icon-s-unfold"></i>
               <span>還書管理</span>
             </template>
             <el-menu-item index="returnBook-list">還書列表</el-menu-item>
           </el-submenu>
-          <el-submenu index="8">
+          <el-submenu index="8" v-if="$roleRule(['ROLE_ADMIN', 'ROLE_USER'])">
             <template slot="title">
               <i class="el-icon-chat-square"></i>
               <span>公告管理</span>
             </template>
             <el-menu-item index="announcement-list">公告列表</el-menu-item>
           </el-submenu>
-          <el-submenu index="9">
+          <el-submenu index="9" v-if="$roleRule(['ROLE_ADMIN'])">
             <template slot="title">
               <i class="el-icon-picture-outline"></i>
               <span>輪播圖管理</span>

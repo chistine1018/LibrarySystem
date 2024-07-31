@@ -14,7 +14,7 @@
     <!--查詢 End-->
 
     <!--功能 Start-->
-    <div style="margin: 0 0 18px 0">
+    <div style="margin: 0 0 18px 0" v-if="$roleRule(['ROLE_ADMIN'])">
       <el-button type="primary" icon="el-icon-plus" @click="dialog.addDataDialog = true">新增</el-button>
     </div>
     <!--功能 End-->
@@ -38,7 +38,7 @@
           <el-table-column
             fixed="right"
             label="操作"
-            width="100">
+            width="100" v-if="$roleRule(['ROLE_ADMIN'])">
             <template slot-scope="scope">
               <el-button
                 size="mini"

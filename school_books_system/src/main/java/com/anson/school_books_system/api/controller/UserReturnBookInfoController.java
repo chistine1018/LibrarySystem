@@ -4,6 +4,7 @@ package com.anson.school_books_system.api.controller;
 
 import com.anson.school_books_system.api.query.UserReturnBookQuery;
 import com.anson.school_books_system.api.vo.UserReturnBookInfoVO;
+import com.anson.school_books_system.common.apirule.ApiRole;
 import com.anson.school_books_system.common.result.ResponseResult;
 import com.anson.school_books_system.enums.RoleEnum;
 import com.anson.school_books_system.service.UserReturnBookInfoService;
@@ -52,6 +53,7 @@ public class UserReturnBookInfoController {
      * @param bookBorrowInfoId 圖書借閱信息id
      * @param count            歸還數量
      */
+    @ApiRole(role = {RoleEnum.ROLE_USER})
     @GetMapping("/userReturnBook")
     public void userReturnBook(
             @RequestParam(name = "bookBorrowInfoId", required = true) Long bookBorrowInfoId,

@@ -4,7 +4,9 @@ package com.anson.school_books_system.api.controller;
 import com.anson.school_books_system.api.form.AdminSaveOrUpdateForm;
 import com.anson.school_books_system.api.query.AdminQuery;
 import com.anson.school_books_system.api.vo.AdminVO;
+import com.anson.school_books_system.common.apirule.ApiRole;
 import com.anson.school_books_system.common.result.ResponseResult;
+import com.anson.school_books_system.enums.RoleEnum;
 import com.anson.school_books_system.service.AdminService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import lombok.AllArgsConstructor;
@@ -35,6 +37,7 @@ public class SuperAdminController {
      * @param query 查詢對象
      * @return
      */
+    @ApiRole(role = {RoleEnum.ROLE_SUPER_ADMIN})
     @GetMapping("/page")
     public IPage<AdminVO> page(AdminQuery query) {
         return adminService.page(query);
@@ -46,6 +49,7 @@ public class SuperAdminController {
      * @param form 表單
      * @return
      */
+    @ApiRole(role = {RoleEnum.ROLE_SUPER_ADMIN, RoleEnum.ROLE_ADMIN})
     @PostMapping("/saveOrUpdate")
     public AdminVO saveOrUpdate(@Validated @RequestBody AdminSaveOrUpdateForm form) {
         return adminService.saveOrUpdate(form);
@@ -56,6 +60,7 @@ public class SuperAdminController {
      *
      * @param id 管理員id
      */
+    @ApiRole(role = {RoleEnum.ROLE_SUPER_ADMIN})
     @GetMapping("/delete")
     public void delete(@RequestParam("id") Long id) {
         adminService.removeById(id);

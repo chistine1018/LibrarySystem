@@ -42,7 +42,7 @@
     <!--查詢 End-->
 
     <!--功能 Start-->
-    <div style="margin: 0 0 18px 0">
+    <div style="margin: 0 0 18px 0" v-if="$roleRule(['ROLE_ADMIN'])">
       <el-button type="primary" icon="el-icon-plus" @click="dialog.addDataDialog = true">新增</el-button>
     </div>
     <!--功能 End-->
@@ -98,9 +98,9 @@
             width="120">
             <template slot-scope="scope">
               <el-button  type="text"
-                          @click="updateData(scope.$index, scope.row)">修改</el-button>
+                          @click="updateData(scope.$index, scope.row)" v-if="$roleRule(['ROLE_ADMIN'])">修改</el-button>
               <el-button  type="text"
-                          @click="bookBorrow(scope.$index, scope.row)">借閱</el-button>
+                          @click="bookBorrow(scope.$index, scope.row)" v-if="$roleRule(['ROLE_USER'])">借閱</el-button>
             </template>
           </el-table-column>
         </el-table>

@@ -4,6 +4,7 @@ package com.anson.school_books_system.api.controller;
 
 import com.anson.school_books_system.api.query.BookBorrowInfoQuery;
 import com.anson.school_books_system.api.vo.BookBorrowInfoVO;
+import com.anson.school_books_system.common.apirule.ApiRole;
 import com.anson.school_books_system.common.result.ResponseResult;
 import com.anson.school_books_system.enums.RoleEnum;
 import com.anson.school_books_system.service.BookBorrowInfoService;
@@ -37,6 +38,7 @@ public class BookBorrowInfoController {
      * @param query
      * @return
      */
+    @ApiRole(role = {RoleEnum.ROLE_ADMIN, RoleEnum.ROLE_USER})
     @GetMapping("/page")
     public IPage<BookBorrowInfoVO> page(BookBorrowInfoQuery query) {
         if (SecurityUtil.getRole().equals(RoleEnum.ROLE_USER)) {
@@ -52,6 +54,7 @@ public class BookBorrowInfoController {
      * @param bookId 圖書id
      * @param borrowTotal  借閱數量
      */
+    @ApiRole(role = {RoleEnum.ROLE_USER})
     @GetMapping("/bookBorrow")
     public void bookBorrow(
             @RequestParam(name = "bookId", required = true) Long bookId,
