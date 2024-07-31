@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * @author
  * @folder 公告管理
- * @package cn.j3code.booksys.api.controller
+ * @package com.anson.school_books_system.api.controller
  * @createTime
  * @description
  */
