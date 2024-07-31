@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Slf4j
@@ -33,5 +34,13 @@ public class SysWebMvcConfig implements WebMvcConfigurer {
         registry.addMapping("/**").allowedOriginPatterns("*")
                 .allowedMethods("GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowCredentials(true).maxAge(3600);
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        //獲取文件的真實路徑
+        String path = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\img\\";
+        //static/img/**是對應resource下工程目錄
+        registry.addResourceHandler("/static/img/**").addResourceLocations("file:" + path);
     }
 }
