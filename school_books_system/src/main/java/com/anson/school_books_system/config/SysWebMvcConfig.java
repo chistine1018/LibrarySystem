@@ -39,8 +39,11 @@ public class SysWebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         //獲取文件的真實路徑
-        String path = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\img\\";
+//        String path = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\img\\";
+        String path = System.getProperty("user.dir") + "/src/main/resources/static/img/";
+
         //static/img/**是對應resource下工程目錄
         registry.addResourceHandler("/static/img/**").addResourceLocations("file:" + path);
     }
+
 }

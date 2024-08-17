@@ -278,7 +278,8 @@ export default {
   data () {
     return {
       // 數據中心
-      imgFileUploadUrl: 'http://localhost:9292/fileUpload/imgUpload',
+      // imgFileUploadUrl: 'http://localhost:9292/fileUpload/imgUpload',
+      imgFileUploadUrl: '/api/fileUpload/imgUpload',
       imgFileUploadHeaders: {},
       queryData: {
         bookNumber: null,

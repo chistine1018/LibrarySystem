@@ -7,8 +7,10 @@ import { Message } from 'element-ui'
 // 1. 創建新的axios實例，
 const service = axios.create({
   // 公共接口--這裡注意後面會講
-  baseURL: 'http://localhost:9292',
+  // baseURL: 'http://localhost:9292',
   // baseURL: 'https://j3code.cn/school_book_api',
+  // nginx反向代理
+  baseURL: '/api',
   // 超時時間 單位是ms，這裡設置了3s的超時時間
   timeout: 30 * 1000
 })

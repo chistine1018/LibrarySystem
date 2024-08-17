@@ -1,0 +1,55 @@
+version: '2.2'
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    environment: 
+      - TZ=Asia/Shanghai
+    ports:
+      - "11086:9588"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/logs:/var/log/nginx
+      - ./nginx/html:/usr/share/nginx/html
+    networks:
+      mynet:
+        ipv4_address: 172.16.0.2
+
+  springboot-docker-deploy:
+    build:
+      context: ./springboot-docker-deploy
+      args:
+        JAR_FILE: school_books_system.jar
+    image: smbms:tag-v0.0.1
+    container_name: springboot-docker-deploy
+    depends_on:
+      - mysql
+    ports:
+      - "8081:9292"
+    networks:
+      mynet:
+        ipv4_address: 172.16.0.3
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: springboot
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+      - .my_data:/var/lib/mysql
+    networks:
+      mynet:
+        ipv4_address: 172.16.0.4
+
+networks:
+  mynet:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.0.0/16
+          gateway: 172.16.0.1
+

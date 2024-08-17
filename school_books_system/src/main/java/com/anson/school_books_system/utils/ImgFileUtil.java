@@ -78,6 +78,7 @@ public class ImgFileUtil {
         // 1、本地文件路徑訪問
         // return newImgFile.getPath();
         // 2、通過服務器訪問靜態資源
-        return "http://localhost:" + PORT + "/static/img/" + newImgFileName;
+//        return "http://localhost:" + PORT + "/static/img/" + newImgFileName;
+        return "/api" + "/static/img/" + newImgFileName;
     }
 }
